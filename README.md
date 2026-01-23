@@ -1,36 +1,127 @@
-# Template Instructions
+# BMad Module Template
 
-After creating a new repo from the template, in the ide or terminal of your choice, first run npm install (or pnpm install if using that instead of npm).
+A template for creating BMad Method modules that can be published to npm and installed via the BMad installer.
 
-## Update README.md and docs folders
+## Quick Start
 
-Update this readme with the real purpose and details of your custom module - remove all of this current info.
+After creating a new repo from this template:
 
-If you need extensive docs, you can add more to the docs folder at project root. For BMad projects - we will continue to follow the diataxis format with llmstxt and docs published site support.
+```bash
+npm install
+```
 
-## Update package.json
+## Setup Checklist
 
-Aside from potentially adding to the packages.json due to a need for custom installer routines, you need to update the following fields in the file:
+### 1. Update package.json
 
-name. description, keywords array, repository.url, version
+Replace the placeholder values:
 
-## Actual Module Contents src Folder
+- `name`: Your package name (e.g., `@bmad-method/your-module`)
+- `description`: What your module does
+- `author`: Your name
+- `repository.url`: Your git repository URL
+- `keywords`: Add relevant search terms
 
-All module contents goes under src directly by convention. If you plan to house more than one module in the repo though, you can use sub folders (src/module1, src/module2). if not all content goes right under src.
+### 2. Update this README.md
 
-The src folder 
+Remove these template instructions and add:
+- What your module does
+- How to use it
+- Any specific configuration needed
 
-###  src/module.yaml (or src/[module-name]/module.yaml)
+### 3. Add your module content
 
-This is the same standard convention followed by any BMad module.
+All module content goes under `src/`:
 
-If you are creating this from scratch, note that the module.yaml aside from making your module installable via the BMad installer, and buildable to other targets and tools, it also serves as the  primary mechanism to define what install questions get asked along with what the default values are.
+```
+src/
+├── module.yaml       # Module metadata and install questions
+├── agents/           # BMad agents
+├── workflows/        # Agent workflows
+└── tools/            # Small reusable tools
+```
 
-### All other module conventions still apply:
+## Module Conventions
 
-- agents folder - All bmad agents go under this folder or a agent named subfolder under the folder
-- workflows - All workflows an agent might use or people can call directly go here
-- tools - really similar to workflows, the main distinction being more conceptual - tools are small and do 1 thing well and are contained within a single prompt file.
-  - Consider a tool for when you might have multiple workflows use it. Not required,
-- * - you can have any other folders as needed also within the repo, along with other tools
-- ensure all content in workflows and agents are using relative paths to each other. This will help with future compatibility to conversion to other formats like Claude skills and similar.
+- **module.yaml**: Defines install questions and defaults
+- **agents/**: All BMad agents go here
+- **workflows/**: Agent workflows or direct-call workflows
+- **tools/**: Small, single-purpose prompt files
+- Use relative paths in all workflows/agents for portability
+
+## Publishing to NPM
+
+### First-time setup
+
+1. Create an npm automation token at <https://www.npmjs.com/settings>/tokens
+2. Add it as a GitHub secret named `NPM_TOKEN` in your repo settings:
+   ```bash
+   gh secret set NPM_TOKEN --repo YOUR-ORG/YOUR-REPO
+   ```
+
+### Release a new version
+
+The module includes release scripts that handle versioning and publishing:
+
+```bash
+# Patch release (0.1.0 -> 0.1.1)
+npm run release
+
+# Minor release (0.1.0 -> 0.2.0)
+npm run release:minor
+
+# Major release (0.1.0 -> 1.0.0)
+npm run release:major
+
+# Prerelease (0.1.0 -> 0.1.1-0)
+npm run release:prerelease
+```
+
+These scripts:
+1. Update the version in package.json
+2. Create a git tag
+3. Push the tag to GitHub
+4. Trigger the publish workflow which publishes to npm
+
+### Manual tag release
+
+You can also create tags manually:
+
+```bash
+git tag v0.1.0
+git push origin v0.1.0
+```
+
+## Workflows
+
+The module includes GitHub Actions workflows:
+
+- **publish.yaml**: Automatically publishes to npm when a version tag is pushed
+- **quality.yaml**: Runs linting and formatting checks
+- **docs.yaml**: Builds documentation
+- **discord.yaml**: Posts updates to Discord (configure if needed)
+
+## Development
+
+```bash
+# Run linting
+npm run lint
+
+# Fix formatting
+npm run format:fix
+
+# Run tests
+npm test
+```
+
+## Module Installation (for users)
+
+Once published, users can install your module via the BMad Method installer or npm:
+
+```bash
+# Via BMad installer
+npx bmad-method install
+
+# Via npm
+npm install your-module-name
+```
