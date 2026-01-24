@@ -14,13 +14,13 @@ default_selected: false
 #   prompt: "What is your game dev experience level?"
 #   default: "intermediate"
 #   result: "{value}"
-  # single-select:
-  #   - value: "beginner"
-  #     label: "Beginner - New to game development, explain concepts clearly"
-  #   - value: "intermediate"
-  #     label: "Intermediate - Familiar with game dev concepts, balance explanation with efficiency"
-  #   - value: "expert"
-  #     label: "Expert - Experienced game developer, be direct and technical"
+#   single-select:
+#     - value: "beginner"
+#       label: "Beginner - New to game development, explain concepts clearly"
+#     - value: "intermediate"
+#       label: "Intermediate - Familiar with game dev concepts, balance explanation with efficiency"
+#     - value: "expert"
+#       label: "Expert - Experienced game developer, be direct and technical"
 
 # -- End Example --
 

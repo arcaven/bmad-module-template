@@ -34,9 +34,9 @@ async function main(customProjectRoot) {
   });
 
   if (agentFiles.length === 0) {
-    console.log('❌ No agent files found. This likely indicates a configuration error.');
-    console.log('   Expected to find *.agent.yaml files in src/{core,modules/*}/agents/');
-    process.exit(1);
+    console.log('ℹ️  No agent files found. Skipping agent schema validation.');
+    console.log('   (Modules may optionally include agents in src/agents/)\n');
+    process.exit(0);
   }
 
   console.log(`Found ${agentFiles.length} agent file(s)\n`);
