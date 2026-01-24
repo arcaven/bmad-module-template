@@ -125,3 +125,15 @@ npx bmad-method install
 # Via npm
 npm install your-module-name
 ```
+
+## License
+
+MIT License — see [LICENSE](LICENSE) for details.
+
+---
+
+**Your Module Name** — Part of the [BMad Method](https://github.com/bmad-code-org/BMAD-METHOD) ecosystem.
+
+[![Contributors](https://contrib.rocks/image?repo=bmad-code-org/YOUR-REPO-NAME)](https://github.com/bmad-code-org/YOUR-REPO-NAME/graphs/contributors)
+
+See [CONTRIBUTORS.md](CONTRIBUTORS.md) for contributor information.
